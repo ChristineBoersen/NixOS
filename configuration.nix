@@ -19,7 +19,6 @@
 
   # Set networking
   networking.networkmanager.enable = true;
-  networking.useDHCP = true;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
    # Let's make hyperV happy and give a realistic screen size
