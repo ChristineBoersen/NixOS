@@ -8,6 +8,7 @@
 
 {
 
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
   environment = {
   # environment.etc
     etc = {
@@ -25,10 +26,40 @@
   };
 
   services.netbox = {
-    enable = true;
-    #secretKeyFile = "";
+    enable = false;
+    secretKeyFile = "/var/lib/netbox/secret-key-file";
     #keycloakdClientSecret = "";
+    # mkdir -p /var/lib/netbox/
+    # nix-shell -p openssl
+    # openssl rand -hex 50 > /var/lib/netbox/secret-key-file
+    #
+    #
+  };
 
+
+  services.nginx = {
+    enable = true;
+    user = "netbox";
+    recommendedTlsSettings = true;
+    clientMaxBodySize = "25m";
+
+    virtualHosts."${config.networking.fqdn}" = {
+      locations = {
+        "/" = {
+          proxyPass = "http://[::1]:8001";
+          # proxyPass = "http://${config.services.netbox.listenAddress}:${config.services.netbox.port}";
+        };
+        "/static/" = { alias = "${config.services.netbox.dataDir}/static/"; };
+      };
+      forceSSL = true;
+      enableACME = true;
+      serverName = "${config.networking.fqdn}";
+    };
+  };
+
+  security.acme = {
+    defaults.email = "acme@${config.networking.domain}";
+    acceptTerms = true;
   };
 
 }

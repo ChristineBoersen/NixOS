@@ -15,7 +15,7 @@
     };
 
     systemPackages = (with pkgs; [
-       zabbixWeb
+        zabbixWeb
     ]);
   };
 
@@ -23,7 +23,6 @@
     #zabbix = {};    # should be created automatically, here so you know where to add additional values
     #
   };
-
 
 
 }
