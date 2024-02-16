@@ -45,7 +45,7 @@
   services.xserver.desktopManager.gnome.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = false;
+  sound.enable = lib.mkForce false;
 
 
   # Allow unfree packages
