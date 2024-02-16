@@ -15,7 +15,9 @@
     };
 
     systemPackages = (with pkgs; [
-        zabbixWeb
+        zabbix.server-mysql
+        zabbix.web
+        zabbix-cli
     ]);
   };
 
