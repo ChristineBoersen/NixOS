@@ -9,7 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./gnome-configuration.nix
-      #./netbox-configureation.nix
+      #./netbox-configuration.nix
       #./simple-nixos-mailserver-configuration.nix
       #./zabbix-configuration.nix
     ];
@@ -34,8 +34,8 @@
 
 
   # Enable networking
-  networking.hostName = "nixgold1"; # Define your hostname.
-  networking.domain = "mclsystems.com";
+  networking.hostName = ""; # Define your hostname.
+  networking.domain = "";
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

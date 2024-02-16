@@ -27,6 +27,8 @@ while true; do
 	echo -e "\n";
 	read -n 1 -p "Accept ${hn}.${dom} as FQDN (HostName + Domain) (Y/N) " acc;
 	if [ "$acc" == "y" ]; then
+		sed -i 's/networking.hostName = ".*";/networking.hostName = "' + "${hn}" + '";/g' ./configuration.nix
+		sed -i 's/networking.domain = ".*";/networking.domain = "' + "${dom}" + '";/g' ./configuration.nix
 		break;
 	fi
 
