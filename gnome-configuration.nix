@@ -1,7 +1,7 @@
 { config, lib, pkgs, options, ... }:
 
 
-(lib.mkIf(options.services.xserver.enable == true && options.services.xserver.gnome.enable == true ) {
+{
    programs = {
     dconf = {
       enable = true;
@@ -19,14 +19,14 @@
                experimental-features = [ "scale-monitor-framebuffer" ];
              };
 
-	     "org/gnome/settings-daemon/plugins/media-keys" = {
+         "org/gnome/settings-daemon/plugins/media-keys" = {
                 shutdown="";
                 custom-keybindings=''
 [  "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" ]
 '';
              };
 
-	     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
                name="logout";
                command="/sbin/shutdown -h now";
                binding="<Control><Alt>Delete";
@@ -189,4 +189,4 @@ ResultActive=yes
     extraGroups = [ "video"];  # gdm locks up with blank screen on start without this
   };
 
-})
+}
