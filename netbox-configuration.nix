@@ -6,7 +6,7 @@
 
 
 
-(lib.mkIf(options.services.netbox.enable == true){
+{
 
   environment = {
   # environment.etc
@@ -15,7 +15,7 @@
     };
 
     systemPackages = (with pkgs; [
-      # netbox
+       netbox
     ]);
   };
 
@@ -25,10 +25,10 @@
   };
 
   services.netbox = {
-    # enable = true;  # already set, for example
+    enable = true;
     #secretKeyFile = "";
     #keycloakdClientSecret = "";
 
   };
 
-})
+}

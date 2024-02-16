@@ -6,7 +6,7 @@
 
 
 
-(lib.mkIf(options.services.simple-nixos-mailserver.enable == true){
+{
 
     imports = [
     (builtins.fetchTarball {
@@ -49,4 +49,4 @@
   };
 
 
-})
+}

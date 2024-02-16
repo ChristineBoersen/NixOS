@@ -5,8 +5,8 @@
 { config, lib, pkgs, options, ... }:
 
 
-(lib.mkMerge[
-(lib.mkIf(options.services.zabbixWeb.enable == true){
+
+{
 
   environment = {
   # environment.etc
@@ -15,7 +15,7 @@
     };
 
     systemPackages = (with pkgs; [
-      # zabbixWeb
+       zabbixWeb
     ]);
   };
 
@@ -24,29 +24,8 @@
     #
   };
 
-})
-(lib.mkIf(options.services.zabbixWeb.enable == true){
 
-  environment = {
-  # environment.etc
-    etc = {
-          # use this section to insert items into the etc dir. The keyname is the filename without the /etc/ prepended to the path
-    };
 
-    systemPackages = (with pkgs; [
-      # zabbixWeb
-    ]);
-  };
+}
 
-  users.users = {
-    #zabbix = {};    # should be created automatically, here so you know where to add additional values
-    #
-  };
 
-  services.zabbixWeb = {
-    # enable = true;  # already set, for example
-
-  };
-
-})
-])
