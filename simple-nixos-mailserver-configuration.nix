@@ -18,21 +18,21 @@
   ];
 
   mailserver = {
-    #enable = false;
+    enable = true;
     #extraVirtualAliases = {};
-    #fqdn = "mail2.mclsystems.com";
+    fqdn = "mail2.mclsystems.com";
     #forwards = {};
-    #domains = [ "mclsystems.com" ];
-    #hierarchySeparator = "/";
+    domains = [ "mclsystems.com" ];
+    hierarchySeparator = "/";
 
     # Alternative, we could just configure LDAP and have the accounts set themselves up, they will auto-create the unix user id if done correctly
-    #ldap = {
-    #    bind = {
-    #        dn = "cn=mail,ou=users,dc=mclsystems,dc=com",
-    #        passwordFile = "",
-    #        doc
-    #    };
-    #};
+    ldap = {
+        bind = {
+            dn = "cn=mail,ou=users,dc=mclsystems,dc=com",
+            passwordFile = "",
+            doc
+        };
+    };
 
     # A list of all login accounts. To create the password hashes, use
     # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
@@ -45,7 +45,7 @@
     #};
 
     #certificateFile = "/root/mclsystems.com.crt"
-    #certificateScheme = "manual";
+    certificateScheme = "manual";
   };
 
 
