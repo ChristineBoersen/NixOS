@@ -18,7 +18,7 @@ while true; do
 
 	sudo mkdir -p /mnt/home
 	sudo mount $drvp1 /mnt/home
-
+	break
  elif [ "$mountpart" == "n" ]
   then
     exit

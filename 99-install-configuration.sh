@@ -9,6 +9,7 @@ while true; do
   then
     cd /mnt
     sudo nixos-install --no-root-passwd
+    break
   elif [ "$installconfig" == "l" ]
   then
     less configuration.nix *.nix

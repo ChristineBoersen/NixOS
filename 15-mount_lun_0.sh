@@ -21,7 +21,7 @@ while true; do
 	sudo chmod 600 /mnt/.swapfile
 	sudo mkswap /mnt/.swapfile
 	sudo swapon /mnt/.swapfile
-
+	break
   elif [ "$mountpart" == "n" ]
   then
     exit

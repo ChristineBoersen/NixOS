@@ -16,6 +16,7 @@ while true; do
 	sudo mkfs.fat -F 32 $drvp1
 	sudo fatlabel $drvp1 NIXBOOT
 	sudo mkfs.ext4 $drvp2 -L NIXROOT
+	break
   elif [ "$createpartinfo" == "l" ]
   then
     sudo sfdisk -l

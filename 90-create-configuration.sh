@@ -22,7 +22,7 @@ while true; do
 
     # won't work since we aren't allowing root password #sudo passwd --root /mnt
     echo -e "now run the following when ready to install:\n\n    sudo nixos-install --no-root-passwd  ";
-
+    break
 elif [ "$createconfig" == "n" ]
   then
     exit
