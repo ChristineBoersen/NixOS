@@ -13,7 +13,7 @@
       # Pick a commit from the branch you are interested in
       url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/e47f3719f1db3e0961a4358d4cb234a0acaa7baf/nixos-mailserver-e47f3719f1db3e0961a4358d4cb234a0acaa7baf.tar.gz";
       # And set its hash
-      sha256 = "6983B9DCC71FEFF20EC7462078D44C19CAC3CF6C36F98A4C5DDEFFFEA732454F";
+      sha256 = "122vm4n3gkvlkqmlskiq749bhwfd0r71v6vcmg1bbyg4998brvx8";
     })
   ];
 
