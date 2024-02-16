@@ -80,8 +80,8 @@
 
 
   services = {
-    avahi.enable = lib.mkDefault false;  # Media discovery not needed
-    openssh.enable = lib.mkDefault true; # Enable the OpenSSH daemon.
+    avahi.enable = lib.mkForce false;  # Media discovery not needed
+    openssh.enable = lib.mkForce true; # Enable the OpenSSH daemon.
     printing.enable = false;    # Change to True to Enable CUPS to print documents.
     timesyncd.servers = [ "10.2.0.164" "10.2.0.126" ];    # Override hard coded nixos NTP servers
   };
