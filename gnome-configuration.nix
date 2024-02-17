@@ -131,7 +131,49 @@ ResultActive=yes
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  programs = {
+    programs = {
+    dconf = {
+      enable = true;
+      profiles = {
+        user.databases = [{
+          settings = with lib.gvariant; {
+            "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+            "org/gnome/desktop/privacy".remember-recent-files = false;
+            "org/gnome/desktop/session".idle-delay = mkUint32 300;
+            "org/gnome/desktop/screensaver".lock-delay = mkUint32 30;
+            "org/gnome/shell/favorite-apps" = "['org.gnome.Nautilus.desktop', 'org.gnome.Console.desktop','firefox.desktop', 'gparted.desktop', 'nixos-manual.desktop']";
+            "org/gnome/mutter" = {
+               edge-tiling = true;
+               attach-modal-dialogs = true;
+               experimental-features = [ "scale-monitor-framebuffer" ];
+             };
+
+         "org/gnome/settings-daemon/plugins/media-keys" = {
+                shutdown="";
+                custom-keybindings=''
+[  "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" ]
+'';
+             };
+
+         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+               name="logout";
+               command="/sbin/shutdown -h now";
+               binding="<Control><Alt>Delete";
+             };
+
+             "org/gnome/settings-daemon/plugins/power" = {         # Suspend only on battery power, not while charging.
+               sleep-inactive-ac-timeout = "0";
+               sleep-inactive-ac-type = "nothing";
+               sleep-button-action = "nothing";
+               power-button-action = "interactive";
+             };
+
+          };
+
+
+        }];
+      };
+    };
 
   };
 
