@@ -61,7 +61,7 @@
       enable = true;
       alsa.enable = true;
     # alsa.support32Bit = true;
-      pulse.enable = true;
+      pulse.enable = false;
       # If you want to use JACK applications, uncomment this
     #  jack.enable = true;
 
@@ -93,6 +93,7 @@
            autoSuspend = false;
            enable = true;
            wayland = true;
+           banner = "${config.networking.fqdnOrHostName}";
          };
          sessionCommands = ''
   test -f ~/.xinitrc && . ~/.xinitrc
@@ -136,8 +137,9 @@ ResultActive=yes
     # environment.systemPackages   INCLUDE INCLUDE INCLUDE
     systemPackages = (with pkgs; [
         firefox
-    ]) ++ ( with pkgs.gnome; [
-      gnome-session
+        gnome.gnome-session
+        xrdp
+        gparted
     ]);
 
     # environment.gnome.exlcudePackages   EXCLUDE EXCLUDE EXCLUDE

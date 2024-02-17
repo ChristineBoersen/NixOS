@@ -18,7 +18,7 @@
   ];
 
   mailserver = {
-    enable = true;
+    enable = false;
     #extraVirtualAliases = {};
     fqdn = "mail2.mclsystems.com";
     #forwards = {};
