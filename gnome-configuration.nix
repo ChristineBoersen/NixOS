@@ -5,10 +5,10 @@
 
 
   services = {
-    #avahi.enable = false;  # Media discovery not needed
+    avahi.enable = lib.mkDefault false;  # Media discovery not needed
 
     gnome = {
-       games.enable = false;
+       games.enable = lib.mkDefault false;
        evolution-data-server.enable = lib.mkForce false;
     };
     # libinput.enable = true;    # Enable touchpad support (enabled default in most desktopManager).
@@ -16,52 +16,52 @@
     pipewire = {
       enable = true;
       alsa.enable = true;
-    # alsa.support32Bit = true;
-      pulse.enable = false;
+      # alsa.support32Bit = true;
+      pulse.enable = false;  # Use pipewire OR pulseaudio . They can't both control sound at once. See hardware.pulseaudio.enable
       # If you want to use JACK applications, uncomment this
-    #  jack.enable = true;
+      # jack.enable = true;
 
       # use the example session manager (no others are packaged yet so this is enabled by default,
       # no need to redefine it in your config for now)
       #media-session.enable = true;
     };
 
-     xrdp = {
+    xrdp = {
       defaultWindowManager = "/run/current-system/sw/bin/gnome-session";
       enable = true;
       openFirewall = true;
     };
 
     xserver = {
-       enable = true;   # Enable the X11 windowing system.
+      enable = true;   # Enable the X11 windowing system.
 
-       ## Desktop Manager
-       desktopManager = {
-         xterm.enable = false;
-         gnome.enable = true;
-       };
+      ## Desktop Manager
+      desktopManager = {
+        xterm.enable = false;
+        gnome.enable = true;
+      };
 
-       ## Display Manager
-       displayManager = {
-         autoLogin.enable = false;
-         defaultSession = "gnome";
-         gdm = {
-           autoSuspend = false;
-           enable = true;
-           wayland = false;
-           banner = "${config.networking.fqdnOrHostName}";
-         };
-         sessionCommands = ''
-  test -f ~/.xinitrc && . ~/.xinitrc
+      ## Display Manager
+      displayManager = {
+        autoLogin.enable = false;
+        defaultSession = "gnome";
+        gdm = {
+          autoSuspend = false;
+          enable = true;
+          wayland =  (config.virtualisation.hypervGuest.enable == false);
+          banner = "${config.networking.fqdnOrHostName}";
+        };
+        sessionCommands = ''
+test -f ~/.xinitrc && . ~/.xinitrc
 '';  # fixes bug where xinit isn't set correctly when homeManager isn't being used
-       };
-       excludePackages = [ pkgs.xterm ] ++ ( with pkgs.xorg; [
-         xrandr
+      };
+      excludePackages = [ pkgs.xterm ] ++ ( with pkgs.xorg; [
+        xrandr
 
-       ]);
+      ]);
 
-       layout = "us";
-       xkbVariant = "";
+      layout = "us";
+      xkbVariant = "";
     };
 
   };
@@ -73,10 +73,8 @@
   hardware.pulseaudio.enable = false;
 
   environment = {
-  # environment.etc
     etc = {
-
-     # Fixes issue with Gnome color manager asking for extra authentication upon xRDP login
+      # Fixes issue with Gnome color manager asking for extra authentication upon xRDP login
       "polkit-1/localauthority/50-local.d/45-allow.colord.pkla".text = ''
 [Allow Colord all Users]
 Identity=unix-user:*
@@ -86,22 +84,20 @@ ResultInactive=no
 ResultActive=yes
 '';
 
-
-
     };   # etc end
 
     # environment.systemPackages   INCLUDE INCLUDE INCLUDE
     systemPackages = (with pkgs; [
-        firefox
-        gnome.gnome-session
-        xrdp
-        gparted
+      firefox
+      gnome.gnome-session
+      xrdp
+      gparted
     ]);
 
     # environment.gnome.exlcudePackages   EXCLUDE EXCLUDE EXCLUDE
     # Items that have no place on a dedicated server
     gnome.excludePackages = ( with pkgs; [
-    #    gnome-photos
+      # gnome-photos
       geoclue2
       gnome-tour
       snapshot
@@ -109,29 +105,25 @@ ResultActive=yes
       cheese # webcam tool
       gnome-calendar
       gnome-characters
-
-      #gnome-color-manager
-
+      # gnome-color-manager
       gnome-contacts
       gnome-maps
       gnome-music
       gnome-terminal
-
       gnome-weather
-#  gedit # text editor
+      # gedit # text editor
       epiphany # web browser
       geary # email reader
-#      evince # document viewer
+      # evince # document viewer
       simple-scan
       totem
       yelp
-     ]);
-
+    ]);
   };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-    programs = {
+  programs = {
     dconf = {
       enable = true;
       profiles = {
@@ -141,52 +133,47 @@ ResultActive=yes
             "org/gnome/desktop/privacy".remember-recent-files = false;
             "org/gnome/desktop/session".idle-delay = mkUint32 300;
             "org/gnome/desktop/screensaver".lock-delay = mkUint32 30;
-            "org/gnome/shell/favorite-apps" = "['org.gnome.Nautilus.desktop', 'org.gnome.Console.desktop','firefox.desktop', 'gparted.desktop', 'nixos-manual.desktop']";
+            "org/gnome/shell" = {
+              favorite-apps = [ "org.gnome.Nautilus.desktop" "org.gnome.Console.desktop" "firefox.desktop" "gparted.desktop" "nixos-manual.desktop" ];
+            }
             "org/gnome/mutter" = {
                edge-tiling = true;
                attach-modal-dialogs = true;
                experimental-features = [ "scale-monitor-framebuffer" ];
-             };
+            };
 
-         "org/gnome/settings-daemon/plugins/media-keys" = {
-                shutdown="";
-                custom-keybindings=''
+            "org/gnome/settings-daemon/plugins/media-keys" = {
+              shutdown="";
+              custom-keybindings=''
 [  "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" ]
 '';
              };
 
-         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-               name="logout";
-               command="/sbin/shutdown -h now";
-               binding="<Control><Alt>Delete";
-             };
+            "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+              name="logout";
+              command="/sbin/shutdown -h now";
+              binding="<Control><Alt>Delete";
+            };
 
-             "org/gnome/settings-daemon/plugins/power" = {         # Suspend only on battery power, not while charging.
-               sleep-inactive-ac-timeout = "0";
-               sleep-inactive-ac-type = "nothing";
-               sleep-button-action = "nothing";
-               power-button-action = "interactive";
-             };
-
+            "org/gnome/settings-daemon/plugins/power" = {         # Suspend only on battery power, not while charging.
+              sleep-inactive-ac-timeout = "0";
+              sleep-inactive-ac-type = "nothing";
+              sleep-button-action = "nothing";
+              power-button-action = "interactive";
+            };
           };
-
-
         }];
       };
     };
-
   };
 
   security = {
-
     pam.services.gdm.enableGnomeKeyring = true;
     rtkit.enable = true;
   };
 
-
-
   users.users.gdm = {
     extraGroups = [ "video"];  # gdm locks up with blank screen on start without this
   };
-
 }
+
