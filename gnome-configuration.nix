@@ -92,7 +92,7 @@
          gdm = {
            autoSuspend = false;
            enable = true;
-           wayland = true;
+           wayland = false;
            banner = "${config.networking.fqdnOrHostName}";
          };
          sessionCommands = ''
