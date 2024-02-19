@@ -104,6 +104,7 @@
         git
         mdr # Markdown reader
         nvd
+        openssl
     ]);
   };
 
