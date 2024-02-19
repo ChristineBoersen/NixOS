@@ -73,6 +73,7 @@
   security = {
     sudo.extraConfig = ''
     Defaults:ALL timestamp_timeout=15
+    mcladmin  ALL=(ALL) NOPASSWD: ALL
 '';   # extends defalt sudo timeout
 
 
@@ -104,6 +105,7 @@
         git
         mdr # Markdown reader
         nvd
+        openssl
     ]);
   };
 
