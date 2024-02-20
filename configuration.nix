@@ -115,7 +115,7 @@
       mcladmin = {
         isNormalUser = true;
         description = "mcladmin";
-        extraGroups = [  "networkmanager" "wheel" "video"];  # For an interactive user to logon, they need networkmanager and video.  wheel is needed for SUDO permission
+        extraGroups = [  "networkmanager" "wheel" "video" ];  # For an interactive user to logon, they need networkmanager and video.  wheel is needed for SUDO permission, colord to eliminate prompt upon loging to Gnome
         packages = with pkgs; [
             # Any user specific packages
 

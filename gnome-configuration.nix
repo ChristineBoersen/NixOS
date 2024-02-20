@@ -75,7 +75,7 @@ test -f ~/.xinitrc && . ~/.xinitrc
   environment = {
     etc = {
       # Fixes issue with Gnome color manager asking for extra authentication upon xRDP login
-      "polkit-1/localauthority/50-local.d/45-allow.colord.pkla".text = ''
+      "polkit-1/localauthority/50-local.d/45-allow-colord.pkla".text = ''
 [Allow Colord all Users]
 Identity=unix-user:*
 Action=org.freedesktop.color-manager.create-device;org.freedesktop.color-manager.create-profile;org.freedesktop.color-manager.delete-device;org.freedesktop.color-manager.delete-profile;org.freedesktop.color-manager.modify-device;org.freedesktop.color-manager.modify-profile
