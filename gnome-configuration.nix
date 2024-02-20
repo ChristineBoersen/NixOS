@@ -48,7 +48,7 @@
         gdm = {
           autoSuspend = false;
           enable = true;
-          wayland =  (config.virtualisation.hypervGuest.enable == false);
+          wayland = true;
           banner = "${config.networking.fqdnOrHostName}";
         };
         sessionCommands = ''
