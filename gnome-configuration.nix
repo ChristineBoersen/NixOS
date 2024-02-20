@@ -11,7 +11,6 @@
        games.enable = lib.mkDefault false;
        evolution-data-server.enable = lib.mkForce false;
     };
-    # libinput.enable = true;    # Enable touchpad support (enabled default in most desktopManager).
 
     pipewire = {
       enable = true;

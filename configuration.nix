@@ -22,9 +22,9 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
    # Let's make hyperV happy and give a realistic screen size
-  boot.kernelParams = ["video=hyperv_fb:1920x1080"];  # https://askubuntu.com/a/399960
+  boot.kernelParams = ["video=hyperv_fb:1600x900"];  # https://askubuntu.com/a/399960
   virtualisation.hypervGuest.enable = true;
-  virtualisation.hypervGuest.videoMode = "1920x1080";
+  virtualisation.hypervGuest.videoMode = "1600x900";
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -42,11 +42,8 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  services.xserver.desktopManager.gnome.enable = true;
-
   # Enable sound with pipewire.
   sound.enable = lib.mkForce false;
-
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
