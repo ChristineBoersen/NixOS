@@ -102,7 +102,7 @@
         git  
         mdr # Markdown reader
         nvd
-        dirname  # used in building
+        direnv  # used in building
         openssl
     ]);
   };
