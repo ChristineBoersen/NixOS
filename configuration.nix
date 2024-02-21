@@ -59,7 +59,7 @@
       enable = true;
       nanorc = ''
         set tabstospaces
-        set tabsize 2
+        set tabsize 4
         set linenumbers
         set trimblanks
         set unix
@@ -99,9 +99,10 @@
     # environment.systemPackages   INCLUDE INCLUDE INCLUDE  #Add your packages here
     systemPackages = (with pkgs; [
         wget
-        git
+        git  
         mdr # Markdown reader
         nvd
+        dirname  # used in building
         openssl
     ]);
   };
