@@ -6,7 +6,7 @@
 
   services = {
     avahi.enable = lib.mkDefault false;  # Media discovery not needed
-
+    geoclue2.enable = lib.mkForce false;  # Location services not needed
     gnome = {
        games.enable = lib.mkDefault false;
        evolution-data-server.enable = lib.mkForce false;
