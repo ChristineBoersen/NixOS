@@ -13,12 +13,17 @@
     etc = {
           # use this section to insert items into the etc dir. The keyname is the filename without the /etc/ prepended to the path
     };
+    
+  };
 
-    systemPackages = (with pkgs; [
-        zabbix.server-mysql
-        zabbix.web
-        zabbix-cli
-    ]);
+  services = {
+    zabbixServer = {
+      enable = true;
+      openFirewall = true;
+    };
+    zabbixWeb = {
+      enable = true;
+    };
   };
 
   users.users = {
