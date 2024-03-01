@@ -22,7 +22,15 @@
       openFirewall = true;
     };
     zabbixWeb = {
-      enable = true;
+      enable = false;  # Set Certificate paths below before enabling
+      virtualHost = {
+        hostName = "${config.networking.fqdn}";
+        forceSSL = true;
+        enableACME = false;
+        sslServerKey = "";  # Must set these before enabling zabbixWeb
+        sslServerChain = "";  # Must set these before enabling zabbixWeb
+        sslServerCert = "";  # Must set these before enabling zabbixWeb
+      };
     };
   };
 

@@ -52,14 +52,10 @@
         "/static/" = { alias = "${config.services.netbox.dataDir}/static/"; };
       };
       forceSSL = true;
-      enableACME = true;
+      enableACME = false;
       serverName = "${config.networking.fqdn}";
     };
   };
-
-  security.acme = {
-    defaults.email = "acme@${config.networking.domain}";
-    acceptTerms = true;
-  };
+  
 
 }
